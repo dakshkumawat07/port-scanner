@@ -1,46 +1,112 @@
 import socket
-import datetime
-import sys
+import concurrent.futures
+import time
 
-def scan_ports(target, start_port, end_port):
-    print("=" * 50)
-    print(f"Port Scanner - Cybersecurity Tool")
-    print(f"Target: {target}")
-    print(f"Scanning ports {start_port} to {end_port}")
-    print(f"Started at: {datetime.datetime.now()}")
-    print("=" * 50)
+open_ports = []
+
+
+def grab_banner(ip, port):
+    try:
+        s = socket.socket()
+        s.settimeout(1)
+        s.connect((ip, port))
+        banner = s.recv(1024).decode(errors="ignore").strip()
+        s.close()
+
+        if banner:
+            return banner
+
+    except:
+        pass
+
+    return "Unknown"
+
+
+def scan_port(ip, port):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.5)
+
+        result = s.connect_ex((ip, port))
+
+        if result == 0:
+            banner = grab_banner(ip, port)
+
+            print(f"[OPEN] Port {port:<5} | {banner}")
+
+            open_ports.append((port, banner))
+
+        s.close()
+
+    except:
+        pass
+
+
+def save_report(target, ip):
+    with open("scan_report.txt", "w") as file:
+
+        file.write("=" * 45 + "\n")
+        file.write("PORT SCAN REPORT\n")
+        file.write("=" * 45 + "\n\n")
+
+        file.write(f"Target : {target}\n")
+        file.write(f"IP     : {ip}\n\n")
+
+        if open_ports:
+
+            file.write("Open Ports\n")
+            file.write("-" * 30 + "\n")
+
+            for port, banner in open_ports:
+                file.write(f"{port:<6} {banner}\n")
+
+        else:
+            file.write("No open ports found.\n")
+
+
+def main():
+
+    print("=" * 45)
+    print("      PROFESSIONAL PORT SCANNER")
+    print("=" * 45)
+
+    target = input("\nEnter IP or Domain: ")
 
     try:
-        target_ip = socket.gethostbyname(target)
-        print(f"Resolved IP: {target_ip}\n")
+        ip = socket.gethostbyname(target)
+
     except socket.gaierror:
-        print("Error: Hostname could not be resolved.")
-        sys.exit()
+        print("\nInvalid Host.")
+        return
 
-    open_ports = []
+    print(f"\nResolved IP : {ip}")
 
-    for port in range(start_port, end_port + 1):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        socket.setdefaulttimeout(1)
+    start_port = int(input("Start Port : "))
+    end_port = int(input("End Port   : "))
 
-        result = sock.connect_ex((target_ip, port))
-        if result == 0:
-            try:
-                service = socket.getservbyport(port)
-            except:
-                service = "Unknown"
-            print(f"[OPEN] Port {port} --> {service}")
-            open_ports.append(port)
-        sock.close()
+    print("\nScanning...\n")
 
-    print("\n" + "=" * 50)
-    print(f"Scan complete. {len(open_ports)} open port(s) found.")
-    print(f"Finished at: {datetime.datetime.now()}")
-    print("=" * 50)
+    start_time = time.time()
 
-# --- Main ---
+    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+
+        for port in range(start_port, end_port + 1):
+            executor.submit(scan_port, ip, port)
+
+    end_time = time.time()
+
+    print("\n" + "=" * 45)
+
+    print("SCAN COMPLETED")
+
+    print(f"Open Ports : {len(open_ports)}")
+
+    print(f"Time Taken : {end_time - start_time:.2f} seconds")
+
+    save_report(target, ip)
+
+    print("\nReport saved as scan_report.txt")
+
+
 if __name__ == "__main__":
-    target = input("Enter target (hostname or IP): ")
-    start = int(input("Start port: "))
-    end = int(input("End port: "))
-    scan_ports(target, start, end)
+    main()
