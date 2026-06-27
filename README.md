@@ -1,142 +1,164 @@
-# 🌐 Professional Port Scanner
+# 🌐 Professional Port Scanner V3
 
-A professional multi-threaded TCP Port Scanner built with Python for network reconnaissance and cybersecurity learning. This tool scans a target host, identifies open ports, performs basic banner grabbing, and generates a scan report.
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Status](https://img.shields.io/badge/Version-3.0-orange)
 
----
-
-## 🚀 Features
-
-* 🔍 Scan IP addresses or domain names
-* ⚡ Multi-threaded scanning for faster performance
-* 🌐 Automatic DNS resolution
-* 📡 Banner grabbing for open services
-* 🎯 Custom port range selection
-* 📝 Automatic scan report generation
-* ⏱ Scan execution time measurement
-* 🛡 Robust exception handling
-* 💻 Interactive command-line interface
+A professional multi-threaded TCP Port Scanner built using Python. This project performs fast port scanning, detects common network services, grabs service banners, and generates professional scan reports in TXT and CSV formats.
 
 ---
 
-## 🛠 Technologies Used
+## ✨ Features
 
-* Python 3
-* Socket Programming
-* Concurrent Futures (ThreadPoolExecutor)
-* DNS Resolution
-* File Handling
-* TCP Networking
+- ⚡ Multi-threaded TCP Port Scanning
+- 🌍 Scan IP Addresses and Domain Names
+- 🔍 Automatic DNS Resolution
+- 📡 Service Detection (HTTP, SSH, FTP, HTTPS, MySQL, etc.)
+- 🏷 Banner Grabbing
+- 📄 Professional TXT Report Generation
+- 📊 CSV Report Export
+- 📈 Scan Statistics
+- 🧾 Clean Command-Line Interface
+- 🛡 Input Validation & Error Handling
+- 💻 Cross-Platform Support
 
 ---
 
 ## 📂 Project Structure
 
-```text
-port-scanner/
-│
-├── port_scanner.py
-├── scan_report.txt
-├── README.md
-└── .gitignore
+```
+Port-Scanner/
+│── port_scanner.py
+│── README.md
+│── scan_report.txt
+│── scan_report.csv
 ```
 
 ---
 
-## ⚙ Installation
+## 🚀 Installation
 
-Clone the repository:
+Clone the repository
 
 ```bash
-git clone https://github.com/dakshkumawat07/Port-Scanner.git
+git clone https://github.com/YOUR_USERNAME/Port-Scanner.git
 ```
 
-Navigate to the project folder:
+Go into the project folder
 
 ```bash
 cd Port-Scanner
 ```
 
-Run the program:
+Run the scanner
 
 ```bash
-python3 port_scanner.py
+python port_scanner.py
 ```
 
 ---
 
-## 📋 Usage
+## 🖥 Example
 
-1. Enter a target IP address or domain.
-2. Specify the starting port.
-3. Specify the ending port.
-4. The scanner identifies open ports.
-5. Results are displayed on the terminal.
-6. A report is automatically saved as `scan_report.txt`.
+```
+============================================================
+        PROFESSIONAL PORT SCANNER V3
+============================================================
 
----
+MENU
+1. Scan Target
+2. Exit
 
-## 📊 Example Output
+Enter your choice: 1
 
-```text
-=========================================
-      PROFESSIONAL PORT SCANNER
-=========================================
+Enter IP Address or Domain:
+scanme.nmap.org
 
-Target : scanme.nmap.org
-
-Resolved IP : 45.xxx.xxx.xxx
+Resolved IP : 45.33.32.156
 
 Scanning...
 
-[OPEN] Port 22  | SSH
-[OPEN] Port 80  | HTTP
+PORT     STATUS     SERVICE         BANNER
 
-=========================================
+22       OPEN       SSH             OpenSSH
+80       OPEN       HTTP            Unknown
 
-SCAN COMPLETED
+============================================================
+SCAN SUMMARY
+============================================================
 
-Open Ports : 2
-
-Time Taken : 1.24 seconds
-
-Report saved as scan_report.txt
+Target           : scanme.nmap.org
+Resolved IP      : 45.33.32.156
+Ports Scanned    : 81
+Open Ports       : 2
+Scan Duration    : 1.84 seconds
 ```
 
 ---
 
-## 🎯 Learning Outcomes
+## 📄 Generated Reports
 
-Through this project, I learned:
+### TXT Report
 
-* TCP/IP networking fundamentals
-* Socket programming in Python
-* DNS resolution
-* Multi-threading using ThreadPoolExecutor
-* Banner grabbing
-* Network reconnaissance techniques
-* File handling
-* Exception handling
+- Professional scan summary
+- Open ports
+- Detected services
+- Banner information
+- Scan duration
+
+### CSV Report
+
+Export results directly into Excel or Google Sheets.
+
+| Port | Service | Banner |
+|------|---------|---------|
+|22|SSH|OpenSSH|
+|80|HTTP|Unknown|
 
 ---
 
-## 🔮 Future Improvements
+## 🛠 Technologies Used
 
-* Service detection
-* CIDR subnet scanning
-* CSV report export
-* GUI using Tkinter
-* Scan history
-* Progress bar
-* Operating system fingerprinting
-* IPv6 support
+- Python 3
+- Socket Programming
+- Concurrent Futures (Multi-threading)
+- CSV Module
+- Time Module
+
+---
+
+## 📚 Concepts Practiced
+
+- Socket Programming
+- TCP Networking
+- DNS Resolution
+- Multi-threading
+- Banner Grabbing
+- Service Detection
+- File Handling
+- CSV Export
+- Exception Handling
+- Input Validation
+
+---
+
+## 🎯 Future Improvements
+
+- GUI Version (Tkinter)
+- PDF Report Export
+- Scan History
+- Custom Thread Configuration
+- Nmap-style Output
+- Automatic Service Detection using `socket.getservbyport()`
+- Colorized Terminal Output
+- Progress Indicator
 
 ---
 
 ## ⚠ Disclaimer
 
-This project is intended for educational purposes only.
-
-Use this scanner only on systems and networks that you own or have explicit permission to test. Unauthorized scanning may violate laws or network policies.
+This project is developed for educational purposes and authorized security testing only. Do not scan systems without proper permission.
 
 ---
 
@@ -144,5 +166,4 @@ Use this scanner only on systems and networks that you own or have explicit perm
 
 **Daksh Kumawat**
 
-GitHub: https://github.com/dakshkumawat07
-
+If you found this project useful, consider giving it a ⭐ on GitHub!
