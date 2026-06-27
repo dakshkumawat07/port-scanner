@@ -1,11 +1,16 @@
-=============================================
-PORT SCAN REPORT
-=============================================
+============================================================
+           PROFESSIONAL PORT SCAN REPORT
+============================================================
 
-Target : scanme.nmap.org
-IP     : 45.33.32.156
+Target           : scanme.nmap.org
+Resolved IP      : 45.33.32.156
+Port Range       : 20-100
+Ports Scanned    : 81
+Open Ports       : 2
+Scan Duration    : 1.76 seconds
 
-Open Ports
-------------------------------
-22     SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.13
-80     Unknown
+------------------------------------------------------------
+PORT    SERVICE        BANNER
+------------------------------------------------------------
+22      SSH            SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.13
+80      HTTP           Unknown
